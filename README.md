@@ -1,4 +1,4 @@
-# deepdreamsofelectricsheep
+# Deep Dreams of Electric Sheep
 An introduction to deep learning - to accompany my Rabbiteer.io 2017 presentation
 
 ## Setup
