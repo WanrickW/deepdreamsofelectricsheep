@@ -3,7 +3,7 @@ import songbird
 
 app = Flask(__name__)
 
-songbird.init()
+model = songbird.init()
 
 @app.route('/')
 def index():
@@ -15,7 +15,7 @@ def write(artist='thebeatles'):
     print(artist)
     sentence = request.args.get('text')
     print(sentence)
-    song = songbird.gettext(sentence)
+    song = songbird.gettext(model,sentence)
     return json.dumps({
         'artist': artist,
         'song': song

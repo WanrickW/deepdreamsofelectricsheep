@@ -9,11 +9,6 @@ import pandas as pd
 import random
 import sys
 
-model = None
-maxlen = 40
-char_indices = None
-chars = None
-indices_char = None
 PATH = '/mnt/shared/rabbiteer2017/songgenerator.h5'
 
 def init():
@@ -58,7 +53,7 @@ def init():
     print("Compiling model complete...")
 
     model = load_model(PATH)
-    print(model)
+    return model
 
 def sample(preds, temperature=1.0):
     preds = np.asarray(preds).astype('float64')
@@ -68,8 +63,7 @@ def sample(preds, temperature=1.0):
     probas = np.random.multinomial(1, preds, 1)
     return np.argmax(probas)
 
-def gettext(sentence):
-    global model
+def gettext(model, sentence):
     global chars
     global char_indices
     global indices_char
@@ -80,9 +74,9 @@ def gettext(sentence):
     x = np.zeros((1, maxlen, len(chars)))
     for t, char in enumerate(sentence):
         x[0, t, char_indices[char]] = 1.
-
-    print(model.predict(x, verbose=0)[0])
-    print(sum(model.predict(x, verbose=0)[0]))
+    print(x)
+    print(model.predict(x))
+    print(sum(model.predict(x)))
 
     # Predict the next 400 characters based on the seed
     generated = ''
